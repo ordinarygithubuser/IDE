@@ -1,4 +1,4 @@
-Code Editor
+## Code Editor
 
 A minimal code editor including only features to create JavaScript web and
 desktop applications in a rapid, opinionated way. The IDE consist of three

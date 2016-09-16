@@ -1,5 +1,6 @@
 import FS from 'fs';
 import Path from 'path';
+import * as Util from './common';
 import ChildProcess from 'child_process';
 
 export const readFile = path => {
@@ -17,7 +18,7 @@ export const readDirectory = path => {
         return { name, path, type };
     });
 
-    return sort(files);
+    return Util.sort(files);
 };
 
 export const readAsObject = path => {
@@ -58,78 +59,16 @@ export const readHierarchy = (path, child) => {
     return node;
 };
 
-export const updateTree = (node, child) => {
-    if (node.path == child.path) {
-        return child;
-    }
-
-    if (!child.path.startsWith(node.path) || !node.open || !node.children) {
-        return node;
-    }
-
-    node.children = node.children.map(current => {
-        if (current.path == child.path) {
-            return child;
-        }
-        if (current.children && current.open) {
-            current.children = current.children.map(cChild => {
-                return updateTree(cChild, child);
-            });
-        }
-        return current;
-    });
-
-    return node;
-};
-
-export const insertNode = (current, node) => {
-    const parentPath = getParentPath(node);
-
-    if (node.path.startsWith(current.path) && current.type != 'file') {
-        if (current.path == parentPath) {
-            if (!current.children) current.children = [];
-            if (!current.open) current.open = true;
-            current.children.push(node);
-            current.children = sort(current.children);
-        } else if (current.children) {
-            current.children = current.children.map(child => {
-                return insertNode(child, node);
-            });
-        }
-    }
-
-    return current;
-};
-
-export const removeNode = (parent, node) => {
-    if (node.path.startsWith(parent.path)) {
-        const parentPath = getParentPath(node);
-
-        if (parent.path == parentPath) {
-            parent.children = parent.children.filter(child => {
-                return child.path != node.path;
-            });
-        } else {
-            parent.children = parent.children.map(child => {
-                return removeNode(child, node);
-            });
-        }
-    }
-    return parent;
-};
-
-export const createTree = (root, files) => {
-    FS.mkdirSync(root);
-    createResources(root, files);
-    return readAsObject(root);
-};
-
 export const createResource = (file, parent) => {
     const path = Path.join(parent, file.name);
 
     if (file.type == 'dir') {
         FS.mkdirSync(path);
-        createResources(path, file.children || []);
+        if (file.children) {
+            file.children.map(child => {
+                createResource(child, path)
+            });
+        }
     } else {
         const stream = FS.createWriteStream(path);
         stream.write(file.content, () => {
@@ -139,22 +78,14 @@ export const createResource = (file, parent) => {
     return Object.assign(file, { path });
 };
 
-export const createResources = (parent, children) => {
-    children.map(child => createResource(child, parent));
-};
-
 export const rename = (name, file) => {
+    const newFile = Object.assign({}, file);
     const segments = file.path.split(Path.sep);
     segments.pop();
     segments.push(name);
     const newPath = segments.join(Path.sep);
     FS.renameSync(file.path, newPath);
-    const newFile = readAsObject(newPath);
-
-    if (newFile.type == 'file') {
-        newFile.content = readFile(newPath);
-    }
-    return newFile;
+    return Object.assign(newFile, { name, path: newPath })
 };
 
 export const remove = file => {
@@ -191,19 +122,6 @@ export const getDrives = done => {
     list.stdin.end();
 };
 
-/**
- * Util
- */
-
-const sort = res => {
-    const _sort = type => {
-        return res.filter(r => r.type == type)
-           .sort((a, b) => a.name > b.name);
-    };
-
-    return _sort('file').concat(_sort('dir'))
-};
-
 const getFileType = path => {
     try {
         const stats = FS.statSync(path);
@@ -211,12 +129,6 @@ const getFileType = path => {
     } catch (e) {
         return null;
     }
-};
-
-export const getParentPath = file => {
-    const segments = file.path.split(Path.sep);
-    segments.pop();
-    return segments.join(Path.sep);
 };
 
 export const filter = (files, file) => {

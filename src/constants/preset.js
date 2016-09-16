@@ -96,7 +96,7 @@ const Package = (props, devDeps = '') => `{
     "license": "${props.license.name}",
     "dependencies": {
         "font-awesome": "^4.6.3",
-        "mva": "^3.0.0",
+        "mva": "^3.2.2",
     }
 }`;
 
