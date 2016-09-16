@@ -1,0 +1,118 @@
+.fileBrowser {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 250px;
+  height: 250px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  border: 1px solid rgb(220, 220, 220);
+
+  input {
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    border-bottom: 1px solid rgb(220, 220, 220);
+    height: 24px;
+    font-size: 13px;
+  }
+
+  .scroll {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 250px;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+
+    .file {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &.selected > .name, &.selected > .name:hover {
+        background: rgb(240, 240, 240);
+
+        i, span {
+          color: rgb(27, 135, 227);
+        }
+      }
+    }
+
+    .name {
+      display: flex;
+      height: 20px;
+      line-height: 20px;
+      padding: 1px;
+
+      i {
+        font-size: 13px;
+        margin-top: 3px;
+        min-width: 20px;
+        max-width: 20px;
+        margin-right: 0;
+        text-align: center;
+
+        &.fa-file {
+          color: #761c19;
+          margin-left: 20px;
+        }
+
+        &.fa-folder {
+          color: #cbce28;
+          margin-right: 2px;
+        }
+      }
+
+      span {
+        font-size: 13px;
+        display: flex;
+        flex-grow: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background: rgb(27, 135, 227);
+
+        i, span {
+          color: white;
+        }
+      }
+    }
+
+    .file ul {
+      padding-left: 10px;
+    }
+  }
+
+  .drives {
+    display: flex;
+    border-top: 1px solid rgb(220, 220, 220);
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .drive {
+    display: inline-block;
+    text-align: center;
+    padding: 2px;
+    margin: 0;
+    font-size: 12px;
+    min-width: 18px;
+    max-width: 18px;
+    height: 20px;
+    line-height: 15px;
+    border-right: 1px solid rgb(220, 220, 220);
+  }
+
+  .drive:hover {
+    cursor: pointer;
+    color: white;
+    background: rgb(27, 135, 227);
+  }
+}

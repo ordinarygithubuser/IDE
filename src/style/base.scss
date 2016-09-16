@@ -1,0 +1,469 @@
+body, html, #root {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+body, html,
+div, span, i, ul, li,
+input, select, button,
+table, thead, tbody, tr, th, td,
+.ace_search_field {
+  font: 15px 'Open Sans', Arial;
+  box-sizing: border-box;
+  color: rgb(91, 91, 91);
+}
+
+input, select, .ace_search_field {
+  border: 1px solid rgb(200, 200, 200);
+  padding: 0 5px;
+}
+
+input, select, .ace_search_field {
+  height: 30px;
+
+  &:focus {
+    border-color: rgb(27, 135, 227);
+    outline:none;
+    -webkit-box-shadow: 0 0 3px rgb(27, 135, 227);
+    box-shadow: 0 0 3px rgb(27, 135, 227);
+  }
+}
+
+input[type=range] {
+  border: none;
+}
+
+.checkbox {
+  display: flex;
+  height: 20px;
+  width: 20px;
+  margin-top: 5px;
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 0;
+  cursor: pointer;
+
+  i {
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    width: 20px;
+  }
+
+  &:hover {
+  }
+
+  &.disabled {
+    cursor: default;
+    background: rgb(180, 180, 180);
+  }
+}
+
+button, .ace_searchbtn, .ace_replacebtn {
+  text-align: center;
+  white-space: nowrap;
+  outline: none;
+  cursor: pointer;
+  height: 30px;
+  padding: 0 6px;
+  color: rgb(25, 25, 25);
+  font-weight: 400;
+  border-radius: 4px;
+  border: 1px solid rgb(200, 200, 200);
+  border-bottom-color: rgb(188, 188, 188);
+  background-image: -webkit-linear-gradient(top, rgb(250, 250, 250) 2%, rgb(239, 239, 239) 98%);
+  box-shadow: inset 0 1px 0 rgb(255, 255, 255), inset 0 -1px 0 rgb(231, 231, 231), 0 2px 3px rgba(0, 0, 0, 0.05);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+  min-width: 60px;
+
+  &.primary {
+    color: rgb(236, 242, 248);
+    font-weight: 400;
+    border: 1px solid rgb(19, 98, 177);
+    border-top-color: rgb(21, 106, 179);
+    border-bottom-color: rgb(17, 86, 168);
+    background-image: linear-gradient(to bottom, rgb(27, 135, 227) 2%, rgb(22, 110, 213) 98%);
+    box-shadow: inset 0 1px 0 rgb(77, 152, 230), inset 0 -1px 0 rgb(22, 107, 202), 0 2px 3px rgba(0, 0, 0, 0.05);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
+  }
+}
+
+.button.disabled {
+  background: linear-gradient(rgb(250, 250, 250) 2%, rgb(239, 239, 239) 98%);
+  border-color: rgb(188, 188, 188);
+  box-shadow: rgb(255, 255, 255) 0 1px 0 0 inset, rgb(231, 231, 231) 0 -1px 0 0 inset, rgba(0, 0, 0, 0.0470588) 0 2px 3px 0;
+  outline-color: rgb(25, 25, 25);
+  color: rgb(25, 25, 25);
+  opacity: 0.5;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  padding: 4px 8px;
+}
+
+ul li i {
+  margin-top: 3px;
+  min-width: 20px;
+  margin-right: 5px;
+}
+
+ul li label:hover {
+  background-image: linear-gradient(to bottom, rgb(27, 135, 227) 2%, rgb(22, 110, 213) 98%);
+  color: white;
+  cursor: pointer;
+}
+
+ul li > *:hover {
+  cursor: pointer;
+  color: white;
+}
+
+.dialog-wrapper {
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.dialog-wrapper .background {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.dialog-wrapper .dialog {
+  position: absolute;
+  z-index: 100;
+  left: 50px;
+  top: 50px;
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.0980392) 0 2px 10px 0, rgba(0, 0, 0, 0.14902) 0 16px 80px -6px, rgba(0, 0, 0, 0.0901961) 0 0 0 1px;
+}
+
+.dialog .bar {
+  text-align: right;
+}
+
+.dialog .bar i {
+  width: 30px;
+  height: 30px;
+  margin-top: 8px;
+  margin-right: 10px;
+}
+
+.dialog .bar i:hover {
+  color: rgb(27, 135, 227);
+  cursor: pointer;
+}
+
+.dialog h2 {
+  display: flex;
+  flex: 1;
+  color: rgb(27, 135, 227);
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  padding: 0;
+  margin: 0 0 5px;
+  font-size: 16px;
+}
+
+.dialog .inner {
+  margin-top: -55px;
+  padding: 10px;
+}
+
+.cols {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.col {
+  display: flex;
+  flex-flow: column nowrap;
+  min-width: 250px;
+
+  &:nth-child(n+2) {
+    margin-left: 20px;
+  }
+}
+
+.row {
+  display: flex;
+  margin-bottom: 10px;
+
+  label {
+    height: 30px;
+    line-height: 30px;
+    display: inline-flex;
+    min-width: 120px;
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  input {
+    min-width: 250px;
+
+    &[type=checkbox] {
+      min-width: 20px;
+    }
+
+    // TODO: into app
+    &.with-button {
+      min-width: 202px;
+      margin-right: 5px;
+    }
+  }
+
+  button {
+    min-width: 30px;
+  }
+
+  textarea {
+    color: rgb(91, 91, 91);
+    border: 1px solid rgb(200, 200, 200);
+    width: 240px;
+    height: 90px;
+    font: 15px 'Open Sans', Arial;
+    padding: 2px 4px;
+    resize: none;
+
+    &:focus {
+      border-color: rgb(27, 135, 227);
+      outline:none;
+      -webkit-box-shadow: 0 0 3px rgb(27, 135, 227);
+      box-shadow: 0 0 3px rgb(27, 135, 227);
+    }
+  }
+
+  .list {
+    width: 250px;
+    border: 1px solid rgb(200, 200, 200);
+    height: 70px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    li {
+      display: flex;
+      margin: 0;
+      padding: 3px 5px;
+      width: 250px;
+
+      &.active {
+        background: rgb(240, 240, 240);
+
+        span, i {
+          color: rgb(27, 135, 227);
+        }
+      }
+
+      span {
+        width: 210px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      i {
+        position: relative;
+        top: 2px;
+        font-size: 12px;
+        min-width: 10px;
+        text-align: right;
+      }
+
+      &:hover {
+        background: rgb(27, 135, 227);
+        cursor: pointer;
+
+        span, i {
+          color: whitesmoke;
+        }
+      }
+    }
+
+    .active {
+
+    }
+  }
+}
+
+.buttons {
+  margin-left: 140px;
+}
+
+.buttons button {
+  margin-right: 10px;
+}
+
+.error {
+  width: 15px;
+  text-align: right;
+  margin-right: 5px;
+}
+
+.error i {
+  cursor: pointer;
+  font-size: 12px;
+  color: #D8000C;
+}
+
+.error i span.text {
+  display: none;
+}
+
+.error i:hover span.text {
+  padding: 3px;
+  text-align: left;
+  width: 220px;
+  border: 1px solid #D8000C;
+  background: #FCE1E5;
+  position: absolute;
+  z-index: 10;
+  display: block;
+}
+
+.combo-box {
+  position: relative;
+  width: 250px;
+  height: 30px;
+  border: 1px solid rgb(200, 200, 200);
+
+  .selected {
+    display: flex;
+    flex: 1;
+    height: 30px;
+
+    span {
+      display: flex;
+      flex-grow: 1;
+    }
+
+    span, i {
+      color: rgb(91, 91, 91);
+      line-height: 30px;
+      padding: 0 5px;
+    }
+  }
+
+  .options {
+    position: absolute;
+    z-index: 10;
+    top: 31px;
+    border-radius: 3px;
+    width: 250px;
+    left: -1px;
+    background: white;
+    border: 1px solid rgb(27, 135, 227);
+
+    .item {
+      padding: 3px 5px;
+
+      &:hover {
+        background: rgb(27, 135, 227);
+        cursor: pointer;
+        color: white;
+      }
+    }
+  }
+
+  &.open .options {
+    -webkit-box-shadow: 0 0 3px rgb(27, 135, 227);
+    box-shadow: 0 0 3px rgb(27, 135, 227);
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.context {
+  position: absolute;
+  display: flex;
+  flex-flow: column nowrap;
+  z-index: 100;
+  background: white;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.0980392) 0 2px 10px 0, rgba(0, 0, 0, 0.14902) 0 16px 80px -6px, rgba(0, 0, 0, 0.0901961) 0 0 0 1px;
+  min-width: 180px;
+
+  .action {
+    display: flex;
+    padding: 2px;
+
+    .icon, label, span {
+      font-size: 13px;
+      height: 22px;
+      line-height: 22px;
+
+    }
+
+    .icon {
+      min-width: 24px;
+      max-width: 24px;
+      text-align: center;
+    }
+
+    label {
+      display: flex;
+      flex-grow: 1;
+      margin-right: 5px;
+    }
+
+    span {
+      color: rgb(120, 120, 120);
+      margin-right: 5px;
+      min-width: 80px;
+      text-align: right;
+    }
+
+    &:hover {
+      background: rgb(27, 135, 227);
+      cursor: pointer;
+
+      span, label, i {
+        color: white;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.splitPanel {
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  overflow: hidden;
+
+  .panel {
+    overflow: hidden;
+  }
+
+  &.vertical .panel1,
+  &.horizontal .panel1 {
+    display: flex;
+  }
+
+  &.vertical .panel1 > *,
+  &.horizontal .panel2 > * {
+    height: inherit;
+  }
+
+  &.horizontal .panel2 {
+    width: 100%;
+  }
+}

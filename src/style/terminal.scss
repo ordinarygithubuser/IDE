@@ -1,0 +1,122 @@
+.terminal {
+  display: flex;
+  border-top: 1px solid #c9c9c9;
+  min-height: 150px;
+  max-height: 150px;
+  background: rgb(248, 248, 248);
+
+  .main {
+    display: flex;
+    flex-grow: 1;
+    flex-flow: column nowrap;
+  }
+
+  .session {
+    background: white;
+    flex: 1;
+    padding: 5px;
+    border-left: 1px solid rgb(220, 220, 220);
+    overflow-y: auto;
+
+    .output, .directory, input {
+      font: 14px 'Consolas', monospace;
+    }
+
+    .inputRow {
+      display: flex;
+      flex-flow: row nowrap;
+    }
+
+    .entry {
+      display: flex;
+      flex-flow: column nowrap;
+
+      .output {
+        background: transparent;
+        border: none;
+        padding: 0;
+        margin-bottom: 10px;
+        overflow: hidden;
+        resize: none;
+      }
+    }
+
+    .directory {
+      margin: 1px 5px 1px 1px;
+    }
+
+    input {
+      display: flex;
+      flex-grow: 1;
+      border: none;
+      background: none;
+      height: 20px;
+      padding: 0;
+      margin: 0;
+      outline: none;
+      box-shadow: none;
+    }
+
+  }
+
+  .sessions {
+    display: flex;
+    flex-flow: row nowrap;
+    border-bottom: 1px solid rgb(220, 220, 220);
+
+    .tabs {
+      display: flex;
+      flex-grow: 1;
+
+      .tab {
+        display: inline-block;
+        padding: 2px 5px;
+        margin-top: 5px;
+        margin-bottom: -1px;
+        border-top: 1px solid rgb(220, 220, 220);
+        border-right: 1px solid rgb(220, 220, 220);
+        border-bottom: 1px solid rgb(220, 220, 220);
+        background: white;
+
+        span {
+          font-size: 14px;
+        }
+
+        i {
+          color: rgb(120, 120, 120);
+          position: relative;
+          top: -2px;
+          margin-left: 4px;
+          font-size: 10px;
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        &.selected {
+          color: rgb(27, 135, 227);
+          border-bottom: 1px solid white;
+        }
+
+        &:first-of-type {
+          border-left: 1px solid rgb(220, 220, 220);
+        }
+      }
+    }
+
+    .menu {
+      i {
+        font-size: 13px;
+        margin-right: 5px;
+        position: relative;
+        top: 6px;
+
+        &:hover {
+          cursor: pointer;
+          color: rgb(27, 135, 227);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+.settings {
+  .main {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  .menu {
+    min-width: 150px;
+    max-width: 150px;
+    border-right: rgb(220, 220, 220);
+  }
+
+  .content {
+    display: flex;
+    min-width: 500px;
+    min-height: 300px;
+  }
+}
