@@ -3,6 +3,7 @@ import { React, FileBrowser, Error } from 'mva';
 import { Load } from '../../actions/project';
 import { CreateSession } from '../../actions/terminal';
 import * as File from '../../actions/file';
+import { HOME_PATH } from '../../util/common';
 
 export default ({ files, close }) => {
     const { open, drives } = files;
@@ -30,6 +31,7 @@ export default ({ files, close }) => {
                 toggle={toggle}
                 select={select}
                 setDrive={change}
+                homepath={HOME_PATH}
             />
         </div>
         <div className="buttons">

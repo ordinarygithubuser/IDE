@@ -14,3 +14,5 @@ export const sort = res => {
 
     return _sort('file').concat(_sort('dir'))
 };
+
+export const HOME_PATH = 'E:\\Programming\\workspace_node' || process.env.HOME || process.env.USERPROFILE;

@@ -3,7 +3,6 @@ import Path from 'path';
 
 export const updateNode = (node, oldNode, newNode) => {
     if (node.path == oldNode.path) {
-        //console.log('set new node', newNode)
         return newNode;
     } else if (oldNode.path.startsWith(node.path) && node.children) {
         node.children = node.children.map(current => {

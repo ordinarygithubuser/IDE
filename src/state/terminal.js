@@ -1,7 +1,7 @@
 import { IdProvider } from 'mva';
 import * as Command from '../util/cmd';
 import * as Actions from '../actions/terminal';
-import { HOME_PATH } from '../util/file';
+import { HOME_PATH } from '../util/common';
 
 const SID = IdProvider();
 

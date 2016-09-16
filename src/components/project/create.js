@@ -1,6 +1,7 @@
 import { React, ComboBox, FileBrowser, Error, Form, Checkbox } from 'mva';
 import { ERROR } from '../../constants/error';
 import * as Preset from '../../constants/preset';
+import { HOME_PATH } from '../../util/common';
 
 import { Create } from '../../actions/project';
 import * as File from '../../actions/file';
@@ -107,6 +108,7 @@ export default class CreateProject extends Form {
                         select={select}
                         setDrive={change}
                         tabIndex="5"
+                        homepath={HOME_PATH}
                     />
                 </div>
             </div>

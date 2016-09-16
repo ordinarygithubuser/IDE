@@ -6,14 +6,14 @@ import * as Flow from '../../actions/flow';
 
 import Header from './header';
 
-const ProjectExplorer = ({ project }) => {
+const ProjectExplorer = ({ project, tmp }) => {
     if (!project) return <noscript />;
 
     const createFileContext = (type, event, file) => {
         const pos = { left: event.clientX, top: event.clientY };
         const actions = CONTEXT[type];
 
-        Flow.SetContext({ pos, actions, data: { file } });
+        Flow.SetContext({ pos, actions, data: { file, tmp } });
     };
 
     return <FileBrowser
@@ -28,11 +28,14 @@ const ProjectExplorer = ({ project }) => {
     />;
 };
 
-export default ({ project, app }) => {
+export default ({ project, tmp }) => {
     return <div className="sideMenu">
         <div className="projectFiles">
             <Header project={project} />
-            <ProjectExplorer project={project} />
+            <ProjectExplorer
+                project={project}
+                tmp={tmp}
+            />
         </div>
     </div>;
 };

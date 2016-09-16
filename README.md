@@ -22,7 +22,8 @@ because the latest pty builds do not contain the needed bindings for node-gyp.
 ## Roadmap
 
 - ~~Fix folder collapsing on rename action~~
-- Fix home path in file browsers
+- ~~Fix home path in file browsers~~
+- ~~Implement copy / paste for files and directories~~
 - Keep editor text in sync with temporary file
 - Make SplitPane resizeable
 - Provide UI interface for frequent commands

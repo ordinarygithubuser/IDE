@@ -71,6 +71,7 @@ export const createResource = (file, parent) => {
         }
     } else {
         const stream = FS.createWriteStream(path);
+        if (!file.content) file.content = readFile(file.path);
         stream.write(file.content, () => {
             stream.close();
         });
@@ -145,4 +146,3 @@ export const contains = (files, file) => {
     }).length > 0;
 };
 
-export const HOME_PATH = 'E:\\Programming\\workspace_node' || process.env.HOME || process.env.USERPROFILE;
