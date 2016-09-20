@@ -1,22 +1,18 @@
 import { React } from 'mva';
 import * as Actions from '../../actions/editor';
 
-export default ({ files, selected }) => {
-    const getClassName = file => {
-        if (selected && file.path == selected.path) {
-            return 'file selected';
-        }
-        return 'file';
-    };
+export default ({ files, file }) => {
+    const close = f => () => Actions.CloseFile(f);
+    const select = f => () => Actions.SelectFile(f);
 
-    const elements = files.map(file => {
-        const open = () => Actions.OpenFile(file);
-        const close = () => Actions.CloseFile(file);
-        const className = getClassName(file);
+    const elements = files.map(current => {
+        const selectedClass = current.path == file.path ? 'selected' : '';
+        const changeClass = current.changed ? 'changed' : 'unchanged';
 
-        return <div className={className} key={file.path}>
-            <span onClick={open}>{file.name}</span>
-            <i className="fa fa-times" onClick={close} />
+        return <div className={`file ${selectedClass}`} key={current.path}>
+            <i className={`fa fa-asterisk ${changeClass}`} />
+            <span onClick={select(current)}>{current.name}</span>
+            <i className="fa fa-times" onClick={close(current)} />
         </div>;
     });
 

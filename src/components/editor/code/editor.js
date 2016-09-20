@@ -7,7 +7,7 @@ import 'brace/ext/searchbox';
 
 import * as Actions from '../../../actions/editor';
 
-export default ({ editor }) => {
+export default ({ file }) => {
     const eProps = {
         $blockScrolling: Infinity,
         fontFamily: 'Consolas'
@@ -21,11 +21,13 @@ export default ({ editor }) => {
             sender: 'editor|cli'
         },
         exec: (env, args, request) => {
-            console.log('save')
+            Actions.Save();
         }
     }];
 
-    const onChange = () => {};
+    const onChange = text => {
+        Actions.SetText(text);
+    };
 
     return <AceEditor
         mode="jsx"
@@ -36,7 +38,7 @@ export default ({ editor }) => {
         height="auto"
         onChange={onChange}
         editorProps={eProps}
-        value={editor.file.content}
+        value={file.content}
         enableBasicAutocompletion
         enableLiveAutocompletion
         enableSnippets

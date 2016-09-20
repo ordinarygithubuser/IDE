@@ -2,6 +2,7 @@
   <dictionary name="dev">
     <words>
       <w>constr</w>
+      <w>objs</w>
       <w>stderr</w>
       <w>stdout</w>
     </words>

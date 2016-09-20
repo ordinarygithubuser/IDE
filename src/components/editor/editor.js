@@ -47,10 +47,10 @@ export default class Editor extends React.Component {
         if (!editor.file) return <noscript />;
 
         return <div className="editor">
-            <Files files={editor.files} selected={editor.file} />
+            <Files {...editor} />
             <div className="wrapper" ref="wrapper">
                 <ActiveEditor
-                    editor={editor}
+                    file={editor.file}
                     dim={rect}
                     resize={this.resize}
                 />

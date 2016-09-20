@@ -7,6 +7,14 @@ export const readFile = path => {
     return FS.readFileSync(path, 'utf-8');
 };
 
+export const write = (file, done) => {
+    const stream = FS.createWriteStream(file.path);
+    stream.write(file.content, err => {
+        stream.close();
+        done(err);
+    });
+};
+
 export const readDirectory = path => {
     const qualify = suffix => Path.join(path, suffix);
 
@@ -70,11 +78,8 @@ export const createResource = (file, parent) => {
             });
         }
     } else {
-        const stream = FS.createWriteStream(path);
-        if (!file.content) file.content = readFile(file.path);
-        stream.write(file.content, () => {
-            stream.close();
-        });
+        if (!file.content) file.content = '';
+        FS.writeFileSync(path, file.content,'utf8');
     }
     return Object.assign(file, { path });
 };
@@ -133,11 +138,15 @@ const getFileType = path => {
 };
 
 export const filter = (files, file) => {
-    if (!file) return files;
-
     return files.filter(current => {
         return current.path != file.path;
     });
+};
+
+export const getFile = (files, path) => {
+    return files.filter(current => {
+        return current.path == path;
+    })[0];
 };
 
 export const contains = (files, file) => {
@@ -145,4 +154,3 @@ export const contains = (files, file) => {
         return file.path == current.path;
     }).length > 0;
 };
-

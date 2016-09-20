@@ -116,7 +116,7 @@ const WebIndex = props => `<!DOCTYPE html>
 
 const WebPackage = props => Package(props);
 
-const WebConf = () => Conf();
+const WebConf = () => Conf({ options: '' });
 
 // Desktop Templates
 

@@ -11,6 +11,7 @@
     border-bottom: 1px solid rgb(220, 220, 220);
 
     .file {
+      display: flex;
       border-right: 1px solid rgb(220, 220, 220);
       border-bottom: 1px solid rgb(220, 220, 220);
       margin-bottom: -1px;
@@ -21,9 +22,26 @@
       i {
         color: rgb(120, 120, 120);
         position: relative;
-        top: -2px;
+        top: 1px;
         margin-left: 5px;
         font-size: 10px;
+
+        &.unchanged {
+          display: none;
+        }
+
+        &.changed {
+          display: block;
+        }
+      }
+
+      span, i {
+        line-height: 22px;
+        font-size: 13px;
+      }
+
+      span {
+        margin-left: 5px;
       }
 
       &:hover {
