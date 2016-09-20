@@ -7,7 +7,7 @@ import 'brace/ext/searchbox';
 
 import * as Actions from '../../../actions/editor';
 
-export default ({ file }) => {
+export default ({ file, dim }) => {
     const eProps = {
         $blockScrolling: Infinity,
         fontFamily: 'Consolas'
@@ -34,8 +34,8 @@ export default ({ file }) => {
         theme="xcode"
         name="code-editor"
         fontSize={14}
-        width="auto"
-        height="auto"
+        width={dim.width + 'px'}
+        height={dim.height + 'px'}
         onChange={onChange}
         editorProps={eProps}
         value={file.content}

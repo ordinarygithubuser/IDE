@@ -1,7 +1,6 @@
 import electron from 'electron';
 
-import { SetTmp } from '../actions/app';
-import { SetDialog } from '../actions/flow';
+import { SetDialog, SetTmp } from '../actions/flow';
 import { DeleteFile, CreateFile } from '../actions/project';
 
 import CreateFileDialog from '../components/file/create';

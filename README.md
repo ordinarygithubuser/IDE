@@ -25,9 +25,14 @@ because the latest pty builds do not contain the needed bindings for node-gyp.
 - ~~Fix home path in file browsers~~
 - ~~Implement copy / paste for files and directories~~
 - ~~Keep editor text in sync with temporary file~~
-- Make SplitPane resizeable
+  * ~~Read file content every time if a file is not already opened~~
+- ~~Make SplitPane resizeable~~
+  * ~~Make area size relative not absolute~~
+  * ~~Let user change relation pre drag and drop~~
 - Provide UI interface for frequent commands
 - Implement model editor
   * Canvas to create and connect elements
   * Generator / Assistant
 - Revisit pty
+- ~~Include footer for messages / stats~~
+- Fix size of ace_content on maximize / minimize

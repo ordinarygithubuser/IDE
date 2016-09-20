@@ -1,8 +1,7 @@
 .terminal {
   display: flex;
+  flex-grow: 1;
   border-top: 1px solid #c9c9c9;
-  min-height: 150px;
-  max-height: 150px;
   background: rgb(248, 248, 248);
 
   .main {

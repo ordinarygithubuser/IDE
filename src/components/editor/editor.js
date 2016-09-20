@@ -21,6 +21,7 @@ export default class Editor extends React.Component {
 
     componentDidMount() {
         window.addEventListener('resize', this.resize);
+        setTimeout(this.resize, 100);
     }
 
     componentWillUnmount () {

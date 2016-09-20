@@ -1,6 +1,7 @@
 import { React, Dialog, Context, SplitPanel } from 'mva';
 
 import Header from './header';
+import Footer from './footer';
 import Explorer from './explorer/explorer';
 import Editor from './editor/editor';
 import Terminal from './terminal/terminal';
@@ -8,26 +9,22 @@ import Terminal from './terminal/terminal';
 import * as Flow from '../actions/flow';
 
 export default class App extends React.Component {
-    getMainHeight () {
-        return this.props.app.main.height;
-    }
-
-    getMenuWidth () {
-        return this.props.app.menu.width;
-    }
-
     render() {
         const state = this.props;
+        const { main, menu } = state.app;
+        const resizeMain = value => Flow.Resize({ name: 'main', key: 'height', value });
+        const resizeMenu = value => Flow.Resize({ name: 'menu', key: 'width', value });
 
         return <div className="app">
             <Header project={state.project} />
-            <SplitPanel orientation="vertical" height={this.getMainHeight()}>
-                <SplitPanel orientation="horizontal" width={this.getMenuWidth()}>
+            <SplitPanel orientation="vertical" height={main.height} resize={resizeMain}>
+                <SplitPanel orientation="horizontal" width={menu.width} resize={resizeMenu}>
                     <Explorer {...state} />
                     <Editor editor={state.editor} />
                 </SplitPanel>
                 <Terminal {...state} />
             </SplitPanel>
+            <Footer state={state} />
             <Dialog state={state} close={Flow.SetDialog} />
             <Context {...state} close={Flow.SetContext} />
         </div>;

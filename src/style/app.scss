@@ -12,6 +12,65 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+
+  header {
+    -webkit-app-region: drag;
+    text-align: center;
+    background: #c9c9c9;
+    padding: 2px 0;
+    min-height: 20px;
+    max-height: 20px;
+    font-size: 14px;
+
+    .window-options {
+      position: absolute;
+      right: 0;
+      top: 0;
+      -webkit-app-region: no-drag;
+
+      i {
+        border-radius: 3px;
+        font-size: 14px;
+        padding: 2px;
+        width: 20px;
+        margin-right: 5px;
+        margin-top: 3px;
+
+        &.minimize {
+        }
+
+        &:hover {
+          cursor: pointer;
+          color: white;
+          background: rgb(27, 135, 227);
+
+          &.close {
+            background: red;
+          }
+        }
+      }
+    }
+  }
+
+  footer {
+    display: flex;
+    border-top: 1px solid rgb(220, 220, 220);
+    background: rgb(248, 248, 248);
+
+    .status {
+      display: flex;
+      flex-grow: 1;
+    }
+
+    .usage {
+      display: flex;
+    }
+
+    label, span {
+      padding: 2px;
+      font-size: 12px;
+    }
+  }
 }
 
 .project-create {

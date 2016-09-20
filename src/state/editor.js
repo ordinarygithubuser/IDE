@@ -35,9 +35,7 @@ export default ({ load, on, persist }) => {
         const editor = make(state.editor);
 
         if (!File.contains(editor.files, file)) {
-            if (!file.content) {
-                file.content = File.readFile(file.path);
-            }
+            file.content = File.readFile(file.path);
             editor.files.push(file);
             editor.prev = push(editor, file);
             editor.file = file;
@@ -76,15 +74,16 @@ export default ({ load, on, persist }) => {
         persist({ editor });
     });
 
-    on(Actions.Save, (_, { editor }) => {
+    on(Actions.Save, (_, { editor, app }) => {
         File.write(editor.file, err => {
             if (err) {
-                console.log('Error writing file: ', err);
+                app.status = 'Error writing file ' + editor.file.name + '.';
             } else {
                 editor.file.changed = false;
                 editor.files  = updateFiles(editor);
-                persist({ editor });
+                app.status = 'Saved ' + editor.file.name + '.';
             }
+            persist({ app, editor });
         });
     });
 
