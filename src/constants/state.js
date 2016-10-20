@@ -6,10 +6,9 @@ export const EditorState = (props = {}) => ({
 });
 
 export const ProjectState = (props = {}) => ({
-    selected: null,
     name: props.name || '',
     author: props.author || '',
-    root: props.root || null,
-    files: props.files || [],
-    license: props.license || ''
+    children: props.files || [],
+    license: props.license || '',
+    open: true
 });

@@ -26,7 +26,7 @@ const Window = () => {
 };
 
 export default ({ project }) => {
-    const path = '- ' + (project ? project.root.path : '');
+    const path = '- ' + (project ? project.name : '');
 
     return <header>
         {`Code Editor v1.0 ${path}`}

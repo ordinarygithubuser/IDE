@@ -11,8 +11,8 @@ is MVA and so it's constructs are used, namely Actions, Components and Stores.
 
 However, on the long run model falls shall be introduced that are diagrams
 describing the interaction between these constructs. Most of boilerplate
-code should be generated through the editor by translating the diagrams (
-described in JSON) into code.
+code should be generated through the editor by translating the diagrams
+(described in JSON) into code.
 
 The terminal can run arbitrary commands. At this time interactive sessions are
 unfortunately not available. pty.js offers the possibility to integrate these
@@ -28,7 +28,7 @@ because the latest pty builds do not contain the needed bindings for node-gyp.
   * ~~Read file content every time if a file is not already opened~~
 - ~~Make SplitPane resizeable~~
   * ~~Make area size relative not absolute~~
-  * ~~Let user change relation pre drag and drop~~
+  * ~~Let user change relation per drag and drop~~
 - Provide UI interface for frequent commands
 - Implement model editor
   * Canvas to create and connect elements

@@ -51,9 +51,8 @@ export default class Editor extends React.Component {
             <Files {...editor} />
             <div className="wrapper" ref="wrapper">
                 <ActiveEditor
-                    file={editor.file}
                     dim={rect}
-                    resize={this.resize}
+                    file={editor.file}
                 />
             </div>
             <ContextWrapper editor={editor} offset={rect} />

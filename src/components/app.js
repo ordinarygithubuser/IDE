@@ -9,6 +9,10 @@ import Terminal from './terminal/terminal';
 import * as Flow from '../actions/flow';
 
 export default class App extends React.Component {
+    componentDidMount () {
+        window.resizeBy(1, 1); // hack
+    }
+
     render() {
         const state = this.props;
         const { main, menu } = state.app;

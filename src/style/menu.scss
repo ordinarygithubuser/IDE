@@ -63,10 +63,10 @@
       border: none;
       height: auto;
       width: auto;
+      overflow-y: auto;
 
       .scroll {
-        height: auto;
-        overflow: hidden;
+        height: 100%;
       }
 
       input, .drives {

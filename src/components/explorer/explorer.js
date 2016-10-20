@@ -1,41 +1,53 @@
-import { React, FileBrowser } from 'mva';
-import { CONTEXT } from '../../constants/menu';
+import { React } from 'mva';
+import FileBrowser from '../../util/file-browser';
+
 import { OpenFile } from '../../actions/editor';
-import * as Project from '../../actions/project';
-import * as Flow from '../../actions/flow';
+import { ToggleFile } from '../../actions/project';
 
 import Header from './header';
+import { Context } from './context';
 
-const ProjectExplorer = ({ project, tmp }) => {
-    if (!project) return <noscript />;
-
-    const createFileContext = (type, event, file) => {
-        const pos = { left: event.clientX, top: event.clientY };
-        const actions = CONTEXT[type];
-
-        Flow.SetContext({ pos, actions, data: { file, tmp } });
-    };
-
-    return <FileBrowser
-        file={project.selected}
-        root={project.root}
-        onlyDirs={false}
+const ProjectExplorer = ({ project, selected, tmp, select }) => {
+    return !project ? <noscript /> : <FileBrowser
+        file={project}
+        selected={selected}
         read={OpenFile}
-        readMode="doubleClick"
-        toggle={Project.ToggleFile}
-        select={Project.SelectFile}
-        setContext={createFileContext}
+        toggle={ToggleFile}
+        select={select}
+        setContext={Context(tmp)}
     />;
 };
 
-export default ({ project, tmp }) => {
-    return <div className="sideMenu">
-        <div className="projectFiles">
-            <Header project={project} />
-            <ProjectExplorer
-                project={project}
-                tmp={tmp}
-            />
-        </div>
-    </div>;
+export default class Explorer extends React.Component {
+    constructor (props) {
+        super(props);
+
+        this.state = {
+            selected: null
+        };
+    }
+
+    render () {
+        const { selected } = this.state;
+        const { project, tmp } = this.props;
+
+        const select = file => {
+            this.setState({ selected: file });
+        };
+
+        return <div className="sideMenu">
+            <div className="projectFiles">
+                <Header
+                    tmp={tmp}
+                    project={project}
+                />
+                <ProjectExplorer
+                    tmp={tmp}
+                    select={select}
+                    project={project}
+                    selected={selected}
+                />
+            </div>
+        </div>;
+    }
 };

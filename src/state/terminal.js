@@ -1,12 +1,15 @@
 import { IdProvider } from 'mva';
 import * as Command from '../util/cmd';
 import * as Actions from '../actions/terminal';
-import { HOME_PATH } from '../util/common';
 
 const SID = IdProvider();
 
+export const Session = (id, dir) => ({
+    dir, id, input: '', history: []
+});
+
 export default ({ init, on }) => {
-    const DEFAULT_SESSION = Command.createSession(SID.next(), HOME_PATH);
+    const DEFAULT_SESSION = Session(SID.next(), 'ws');
 
     init('terminal', {
         session: DEFAULT_SESSION,
@@ -16,10 +19,7 @@ export default ({ init, on }) => {
     });
 
     on(Actions.CreateSession, (dir, state, update) => {
-        if (!dir && state.project) dir = state.project.root.path;
-        else dir = HOME_PATH;
-
-        state.terminal.session = Command.createSession(SID.next(), dir);
+        state.terminal.session = Session(SID.next(), 'ws');
         state.terminal.sessions.push(state.terminal.session);
         update(state);
     });
@@ -43,16 +43,14 @@ export default ({ init, on }) => {
         update(state);
     });
 
-    on(Actions.Execute, (_, state, update) => {
-        const { input, dir } = state.terminal.session;
+    on(Actions.Execute, (_, { terminal }, update) => {
+        const result = Command.execute(terminal.session);
 
-        Command.execute(input, dir, result => {
-            result.dir = state.terminal.session.dir;
-            result.input = state.terminal.session.input;
-            state.terminal.session.input = '';
-            state.terminal.session.history.push(result);
-            update(state);
-        });
+        result.dir = terminal.session.dir;
+        result.input = terminal.session.input;
+        terminal.session.input = '';
+        terminal.session.history.push(result);
+        update({ terminal });
     });
 
     on(Actions.Previous, (_, state, update) => {

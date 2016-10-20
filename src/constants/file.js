@@ -12,7 +12,7 @@ const MVAAction = props => {
 ${actions}`;
 };
 
-const MVAStatefulComponent = props => {
+const MVAComponent = props => {
     const state = !props.state ? '' : `
         this.state = {
 
@@ -56,12 +56,6 @@ export default class Component extends React.Component {
 };`;
 };
 
-const MVAStatelessComponent = () => `import { React } from 'mva';
-
-export default (state) => {
-    return <div className=""></div>;
-};`;
-
 const MVAStore = () => `import * as Action from '../actions/';
 
 export default ({ load, init } => {
@@ -73,65 +67,49 @@ export default ({ load, init } => {
 });
 `;
 
-const Package = () => `{
-    "name": "Project",
-    "version": "0.0.1",
-    "description": "",
-    "main": "",
-    "scripts": {},
-    "dependencies": {},
-    "devDependencies": {},
-    "keywords": [],
-    "author": "Anonymous",
-    "license": "None"
-}`;
+const MVAModel = () => '';
 
-const IndexHTML = () => `<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Application</title>
-    </head>
-    <body>
-        <h1>Application</h1>
-    </body>
-</html>`;
+const MVAService = () => '';
 
 /**
  * Exports { Types, Templates }
  */
 
 export const Types = [
-    { name: 'Directory', suffix: '' },
-    { name: 'File', suffix: '' },
-    { name: 'Javascript File', suffix: '.js' },
-    { name: 'HTML File', suffix: '.html' },
-    { name: 'JSON File', suffix: '.json' },
-    { name: 'SASS File', suffix: '.sass' },
-    { name: 'Model File', suffix: '.mod' }
+    {
+        name: 'Directory',
+        suffix: '',
+        alias: 'dir'
+    }, {
+        name: 'Action',
+        suffix: '.js',
+        alias: 'act',
+        text: MVAAction
+    },
+    {
+        name: 'Data',
+        suffix: '.json',
+        alias: '',
+        text: () => ''
+    }, {
+        name: 'Component',
+        suffix: '.js',
+        alias: 'cmp',
+        text: MVAComponent
+    }, {
+        name: 'Model',
+        suffix: '.js',
+        alias: 'mod',
+        text: MVAModel
+    }, {
+        name: 'Store',
+        suffix: '.js',
+        alias: 'str',
+        text: MVAStore
+    }, {
+        name: 'Service',
+        suffix: '.js',
+        alias: 'svc',
+        text: MVAService
+    }
 ];
-
-export const Templates = {
-    'Javascript File': [
-        { name: 'None', text: () => '' },
-        { name: 'MVA Action', text: MVAAction },
-        { name: 'MVA Component', text: MVAStatelessComponent },
-        { name: 'MVA Component (State)', text: MVAStatefulComponent },
-        { name: 'MVA Store', text: MVAStore },
-        { name: 'Web Server', text: () => '' }
-    ],
-    'Model File': [
-        { name: 'None', text: () => '' },
-        { name: 'Action', text: () => '' },
-        { name: 'Component', text: () => '' },
-        { name: 'Store', text: () => '' }
-    ],
-    'JSON File': [
-        { name: 'None', text: () => '' },
-        { name: 'package.json', text: Package }
-    ],
-    'HTML File': [
-        { name: 'None', text: () => '' },
-        { name: 'Index', text: IndexHTML }
-    ]
-};

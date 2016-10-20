@@ -1,4 +1,5 @@
 import { React } from 'mva';
+import { round } from '../util/common';
 const remote = require('electron').remote;
 
 export default class Footer extends React.Component {
@@ -35,7 +36,7 @@ export default class Footer extends React.Component {
             </div>
             <div className="usage">
                 <label>Memory </label>
-                <span>{memUsed + ' MB'}</span>
+                <span>{round(memUsed, 2) + ' MB'}</span>
             </div>
         </footer>;
     }

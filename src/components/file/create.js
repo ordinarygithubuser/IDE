@@ -1,15 +1,14 @@
 import { React, ComboBox, Error, Form } from 'mva';
-import { Types, Templates } from '../../constants/file';
+import { Types } from '../../constants/file';
 import { CreateFile } from '../../actions/project';
 
-import Template from './template';
 import MVAAction from './mva-action';
 import MVAComponent from './mva-component';
 
-const getDetails = template => {
-    switch (template.name) {
-        case 'MVA Action':              return MVAAction;
-        case 'MVA Component (State)':   return MVAComponent;
+const getDetails = type => {
+    switch (type.alias) {
+        case 'act': return MVAAction;
+        case 'cmp': return MVAComponent;
     }
 
     return () => <div>
@@ -17,10 +16,8 @@ const getDetails = template => {
     </div>;
 };
 
-const FileDetails = ({ template, props, update }) => {
-    if (!template) return <noscript />;
-
-    const Details = getDetails(template);
+const FileDetails = ({ type, props, update }) => {
+    const Details = getDetails(type);
 
     return <div className="col">
         <h3>Template Options</h3>
@@ -34,28 +31,34 @@ export default class NewFile extends Form {
         this.state = {
             name: '',
             type: Types[0],
-            template: null,
             props: {},
             errors: {}
         };
     }
 
     render () {
-        const file = this.props.project.selected;
-        const { name, type, template, props, errors } = this.state;
+        const { file } = this.props.data;
+        const { name, type, props, errors } = this.state;
 
         const setType = newType => {
-            const templates = Templates[newType.name] || [];
-            this.setState({ type: newType, template: templates[0] });
+            this.setState({ type: newType });
         };
 
         const create = () => {
             if (name.length > 0) {
-                CreateFile({
+                const data = {
                     name: name + type.suffix,
-                    type: type.name == 'Directory' ? 'dir' : 'file',
-                    content: template ? template.text(props) : ''
-                });
+                    type: type.alias
+                };
+
+                if (data.type == 'dir') {
+                    data.open = true;
+                    data.children = [];
+                } else {
+                    data.content = type.text(props);
+                }
+
+                CreateFile({ data, file });
                 this.props.close();
             } else {
                 errors.name = 'The name cannot be empty.';
@@ -64,8 +67,8 @@ export default class NewFile extends Form {
         };
 
         return <div className="file-create">
-            <h2 title={file.path}>
-                {`Create new file in ${file.name}`}
+            <h2>
+                {`Create new file`}
             </h2>
             <div className="cols">
                 <div className="col">
@@ -84,15 +87,10 @@ export default class NewFile extends Form {
                             select={setType}
                         />
                     </div>
-                    <Template
-                        type={type}
-                        template={template}
-                        setTemplate={this.setValue('template')}
-                    />
                 </div>
                 <FileDetails
                     props={props}
-                    template={template}
+                    type={type}
                     update={this.setValue('props')}
                 />
             </div>

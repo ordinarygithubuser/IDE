@@ -38,7 +38,7 @@ export default ({ file, dim }) => {
         height={dim.height + 'px'}
         onChange={onChange}
         editorProps={eProps}
-        value={file.content}
+        value={file.tmp}
         enableBasicAutocompletion
         enableLiveAutocompletion
         enableSnippets

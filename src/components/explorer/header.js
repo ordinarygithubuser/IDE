@@ -1,28 +1,39 @@
 import { React } from 'mva';
-import * as Flow from '../../actions/flow';
-
+import { SetDialog } from '../../actions/flow';
 import CreateProject from '../project/create';
-import OpenProject from '../project/open';
+//import OpenProject from '../project/open';
 
-export default ({ project }) => {
+import { TypedContext } from './context';
+
+const NO_PROJECT = { name: 'No project loaded.'};
+
+export default ({ project, tmp }) => {
     if (!project) {
-        project = { name: 'No project loaded.'};
+        project = NO_PROJECT;
     }
+
+    const showContext = event => {
+        if (project != NO_PROJECT) {
+            TypedContext('dir', project, tmp)(event);
+        }
+    };
 
     return <div className="title">
         <i className="fa fa-folder" />
-        <span>{project.name}</span>
+        <span onClick={showContext}>
+            {project.name}
+        </span>
         <div className="menu">
             <i
                 className="fa fa-plus-circle"
                 title="New"
-                onClick={() => Flow.SetDialog({ Component: CreateProject })}
+                onClick={() => SetDialog({ Component: CreateProject })}
             />
             <i
                 className="fa fa-database"
                 title="Load"
-                onClick={() => Flow.SetDialog({ Component: OpenProject })}
+                onClick={() => {}}
             />
         </div>
-    </div>
+    </div>;
 };

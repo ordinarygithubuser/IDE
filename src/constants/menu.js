@@ -28,7 +28,10 @@ const Delete = {
     name: 'Delete',
     short: 'Entf',
     enabled: () => true,
-    execute: () => DeleteFile()
+    execute: data => {
+        console.log(data)
+        DeleteFile(data)
+    }
 };
 
 const Copy = {
